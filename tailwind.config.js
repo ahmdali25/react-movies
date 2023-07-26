@@ -10,7 +10,10 @@ export default {
         neutral: '#FFFFFF',
         primary: '#1D4ED8',
         secondary: "#CDCDCD",
-        background: "#233458",
+
+        // background
+        blue: "#233458",
+        darkBlue: '#192642',
       },
       fontFamily: {
         'sans': ['Montserrat', ...defaultTheme.fontFamily.sans],
