@@ -1,18 +1,25 @@
-import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+
+import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/Home";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<RootLayout />}>
+      <Route index element={<Home />} />
+    </Route>,
+  ),
+);
 
 export default function App() {
   return (
     <>
-      <Navbar />
-      <main className="container mx-auto p-6">
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </main>
+      <RouterProvider router={router} />
     </>
   );
 }
