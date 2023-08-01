@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import RootLayout from "./layouts/RootLayout";
-import Home from "./pages/Home";
+import Home, { homeLoader } from "./pages/Home";
 import Result from "./pages/Result";
 import Detail, { movieDetailLoader } from "./pages/Detail";
 import NotFound from "./pages/NotFound";
@@ -15,7 +15,7 @@ import MovieSearchContextProvider from "./context/MovieSearch";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route index element={<Home />} />
+      <Route index element={<Home />} loader={homeLoader} />
       <Route path="search/:query" element={<Result />} />
       <Route path="movie/:id" element={<Detail />} loader={movieDetailLoader} />
       <Route path="*" element={<NotFound />} />

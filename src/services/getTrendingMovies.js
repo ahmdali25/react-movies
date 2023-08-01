@@ -1,10 +1,9 @@
 import axiosInstance from "../api/axiosInstance";
 
-export async function getTrendingMovies(callback) {
+export async function getTrendingMovies() {
     try {
         const response = await axiosInstance.get("/trending/movie/day");
-        const data = await response.data.results;
-        callback(data);
+        return response.data.results;
     } catch (error) {
         console.log(error);
     }

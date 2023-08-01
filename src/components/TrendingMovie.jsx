@@ -1,19 +1,10 @@
-import { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
-import { getTrendingMovies } from "../services/getTrendingMovies";
 
-export default function Home() {
-  const [popularMovies, setPopularMovies] = useState([]);
-
-  useEffect(() => {
-    getTrendingMovies((data) => {
-      setPopularMovies(data);
-    });
-  }, []);
-
+export default function Home(data) {
+  const movie = data;
   return (
     <div className="mt-4 grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-5">
-      {popularMovies.map((movie) => (
+      {movie.data.map((movie) => (
         <MovieCard
           key={movie.id}
           id={movie.id}
