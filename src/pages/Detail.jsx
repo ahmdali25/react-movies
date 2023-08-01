@@ -62,7 +62,6 @@ export default function Detail() {
 
   return (
     <section>
-      {/* <h1 className="text-xl font-bold text-primary">Detail Movies</h1> */}
       <div className="flex items-center gap-10">
         {movie.poster_path ? (
           <img

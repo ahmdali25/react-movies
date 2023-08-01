@@ -1,6 +1,29 @@
+import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { getSearchMovie } from "../services/getSearchMovie";
+import { MovieSearch } from "../context/MovieSearch";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const { query, setQuery, setMovie } = useContext(MovieSearch);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (query) {
+      getSearchMovie(query).then((data) => {
+        setMovie(data);
+        navigate(`/search/${query}`);
+      });
+    }
+  }, [query, setMovie, navigate]);
+
+  function handleSearch(query) {
+    setQuery(query);
+    if (query === "") {
+      navigate("/");
+    }
+  }
+
   return (
     <nav className="bg-blue px-20 py-4 text-neutral">
       <div className="flex items-center justify-between">
@@ -36,6 +59,8 @@ export default function Navbar() {
             type="text"
             placeholder="Search.."
             className="border-none bg-darkBlue px-2 text-sm outline-none"
+            value={query}
+            onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
       </div>
