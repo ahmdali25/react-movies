@@ -1,12 +1,15 @@
 import { useLoaderData, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getMovieDetails } from "../services/getMovieDetails";
 import { getMovieCredits } from "../services/getMovieCredits";
 import { getMovieRecommendations } from "../services/getMovieRecommendations";
+import { getMovieVideos } from "../services/getMovieVideos";
 import ProfileCard from "../components/ProfileCard";
 import MovieCard from "../components/MovieCard";
 import Button from "../components/Button";
+import TrailerModal from "../components/TrailerModal";
 import { StarIcon, PhotoIcon } from "../components/Icons";
-import { Link } from "react-router-dom";
 
 export async function movieDetailLoader({ params }) {
   const { id } = params;
@@ -29,36 +32,58 @@ export async function movieDetailLoader({ params }) {
   return data;
 }
 
-function timeConvert(num) {
-  let hours = num / 60;
-  let rhours = Math.floor(hours);
-  let minutes = (hours - rhours) * 60;
-  let rminutes = Math.round(minutes);
-  return rhours + "h " + rminutes + "m";
-}
-
-function formatDate(date) {
-  const newDate = new Date(date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
-  return newDate;
-}
-
-function findDirector(arr) {
-  const director = arr.find((crew) => crew.job === "Director");
-  return director;
-}
-
 export default function Detail() {
   const { id } = useParams();
   const data = useLoaderData();
+  const [trailer, setTrailer] = useState();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const movie = data.movie;
   const cast = data.cast.cast;
   const crew = findDirector(data.cast.crew);
   const recommendations = data.recommendations.results;
   const poster = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
+
+  function timeConvert(num) {
+    let hours = num / 60;
+    let rhours = Math.floor(hours);
+    let minutes = (hours - rhours) * 60;
+    let rminutes = Math.round(minutes);
+    return rhours + "h " + rminutes + "m";
+  }
+
+  function formatDate(date) {
+    const newDate = new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+    return newDate;
+  }
+
+  function findDirector(arr) {
+    const director = arr.find((crew) => crew.job === "Director");
+    return director;
+  }
+
+  async function handleClick() {
+    const data = await getMovieVideos(id);
+    const findTrailer = data.find(
+      (video) =>
+        (video.name === "Official Trailer") | (video.name === "Main Trailer"),
+    );
+
+    setTrailer(findTrailer);
+    setIsModalOpen(true);
+  }
+
+  // close modal if click outside modal
+  useEffect(() => {
+    const closeModal = () => {
+      setIsModalOpen(false);
+    };
+
+    document.body.addEventListener("click", closeModal);
+  }, []);
 
   return (
     <section>
@@ -105,7 +130,7 @@ export default function Detail() {
           </div>
 
           <div className="flex gap-2">
-            <Button icon="play" text="Trailer" />
+            <Button onClick={handleClick} icon="play" text="Trailer" />
             <Button icon="watch" text="Watchlist" />
           </div>
           <h2 className="mt-4 text-xl font-semibold">Overview</h2>
@@ -172,6 +197,7 @@ export default function Detail() {
           .
         </p>
       )}
+      {isModalOpen ? <TrailerModal id={trailer.key}></TrailerModal> : ""}
     </section>
   );
 }
