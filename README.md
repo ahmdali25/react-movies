@@ -1,8 +1,29 @@
-# React + Vite
+# React Movie
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple movie app from [The Movie Database (TMDB) API](https://developer.themoviedb.org/reference/intro/getting-started), built using **React.js** and **TailwindCSS**.
 
-Currently, two official plugins are available:
+### Project Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone this repository.
+2. Install dependencies.
+
+```sh
+yarn
+```
+
+3. Take a copy of `.env.sample` and rename to `.env`
+4. Register [TMDB](https://developer.themoviedb.org/reference/intro/getting-started) account and get your API Key
+5. Enter the details into the `.env` file
+
+## Usage
+
+```sh
+yarn dev
+```
+
+## Built with
+
+- [React.js](https://react.dev/)
+- [Vite.js](https://vitejs.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [React Router](https://reactrouter.com/en/main)
