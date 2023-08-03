@@ -31,12 +31,80 @@ export default function Navbar() {
           <h1 className="text-lg font-bold">
             <Link to="/">MovieDB</Link>
           </h1>
-          <ul className="flex items-center gap-5 text-sm">
-            <li className="font-medium">
-              <Link to="/">Movies</Link>
+          <ul className="flex items-center gap-6 text-sm">
+            <li className="group relative inline-block font-medium">
+              <span className="cursor-pointer">Movies</span>
+              <ul className="absolute z-10 hidden w-36 rounded bg-white py-2 shadow-lg group-hover:block">
+                <li>
+                  <Link
+                    to="/movie"
+                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
+                  >
+                    Popular
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/movie"
+                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
+                  >
+                    Now Playing
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/movie"
+                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
+                  >
+                    Upcoming
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/movie"
+                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
+                  >
+                    Top Rated
+                  </Link>
+                </li>
+              </ul>
             </li>
-            <li className="font-medium">
-              <Link to="/movies">TV Shows</Link>
+            <li className="group relative inline-block font-medium">
+              <span className="cursor-pointer">TV Show</span>
+              <ul className="absolute z-10 hidden w-36 rounded bg-white py-2 shadow-lg group-hover:block">
+                <li>
+                  <Link
+                    to="/tv"
+                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
+                  >
+                    Popular
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/tv"
+                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
+                  >
+                    Airing Today
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/tv"
+                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
+                  >
+                    On The Air
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/tv"
+                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
+                  >
+                    Top Rated
+                  </Link>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
