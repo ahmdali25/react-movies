@@ -8,7 +8,7 @@ export default function MovieCard({ id, poster, title, rating, releaseDate }) {
 
   return (
     <Link
-      to={`/movie/${id}`}
+      to={`/movie-detail/${id}`}
       className="rounded-lg bg-slate-800 transition duration-300 ease-in-out hover:opacity-90"
     >
       {poster ? (
