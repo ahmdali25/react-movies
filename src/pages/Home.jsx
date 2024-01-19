@@ -1,4 +1,4 @@
-import TrendingMovie from "../components/TrendingMovie";
+import Movie from "../components/Movie";
 import { useLoaderData } from "react-router-dom";
 import { getTrendingMovies } from "../services/getTrendingMovies";
 
@@ -14,7 +14,7 @@ export default function Home() {
       <div className="flex items-center gap-4">
         <h1 className="text-xl font-bold text-primary">Trending Movies</h1>
       </div>
-      <TrendingMovie data={data} />
+      <Movie data={data} />
     </section>
   );
 }

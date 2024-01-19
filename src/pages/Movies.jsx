@@ -1,4 +1,4 @@
-import TrendingMovie from "../components/TrendingMovie";
+import Movie from "../components/Movie";
 import { useLoaderData } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { getMovies } from "../services/getMovies";
@@ -26,7 +26,7 @@ const transformPath = (path) => {
   return headName.join(' ')
 }
 
-export default function Movie() {
+export default function Movies() {
   const data = useLoaderData();
   const location = useLocation();
 
@@ -35,7 +35,7 @@ export default function Movie() {
       <div className="flex items-center gap-4">
         <h1 className="text-xl font-bold text-primary">{ headerName(location.pathname) } Movies</h1>
       </div>
-      <TrendingMovie data={data} />
+      <Movie data={data} />
     </section>
   );
 }

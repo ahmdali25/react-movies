@@ -1,6 +1,6 @@
 import MovieCard from "./MovieCard";
 
-export default function Home(data) {
+export default function Movie(data) {
   const movie = data;
   return (
     <div className="mt-4 grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-5">
