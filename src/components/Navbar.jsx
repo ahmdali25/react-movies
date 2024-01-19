@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getSearchMovie } from "../services/getSearchMovie";
 import { MovieSearch } from "../context/MovieSearch";
 import { useNavigate } from "react-router-dom";
+import NavItem from "./NavItem";
 
 export default function Navbar() {
   const { query, setQuery, setMovie } = useContext(MovieSearch);
@@ -35,75 +36,19 @@ export default function Navbar() {
             <li className="group relative inline-block font-medium">
               <span className="cursor-pointer">Movies</span>
               <ul className="absolute z-10 hidden w-36 rounded bg-white py-2 shadow-lg group-hover:block">
-                <li>
-                  <Link
-                    to="/movie"
-                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
-                  >
-                    Popular
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/movie"
-                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
-                  >
-                    Now Playing
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/movie"
-                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
-                  >
-                    Upcoming
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/movie"
-                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
-                  >
-                    Top Rated
-                  </Link>
-                </li>
+                <NavItem to="/movie" id="popular">Popular</NavItem>
+                <NavItem to="/movie" id="now_playing">Now Playing</NavItem>
+                <NavItem to="/movie" id="upcoming">Upcoming</NavItem>
+                <NavItem to="/movie" id="top_rated">Top Rated</NavItem>
               </ul>
             </li>
             <li className="group relative inline-block font-medium">
               <span className="cursor-pointer">TV Show</span>
               <ul className="absolute z-10 hidden w-36 rounded bg-white py-2 shadow-lg group-hover:block">
-                <li>
-                  <Link
-                    to="/tv"
-                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
-                  >
-                    Popular
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/tv"
-                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
-                  >
-                    Airing Today
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/tv"
-                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
-                  >
-                    On The Air
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/tv"
-                    className="block px-5 py-1.5 text-black hover:bg-gray-100"
-                  >
-                    Top Rated
-                  </Link>
-                </li>
+                <NavItem to="/tv" id="popular">Popular</NavItem>
+                <NavItem to="/tv" id="airing-today">Airing Today</NavItem>
+                <NavItem to="/tv" id="on-the-air">On The Air</NavItem>
+                <NavItem to="/tv" id="popular">Popular</NavItem>
               </ul>
             </li>
           </ul>
