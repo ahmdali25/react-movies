@@ -36,19 +36,35 @@ export default function Navbar() {
             <li className="group relative inline-block font-medium">
               <span className="cursor-pointer">Movies</span>
               <ul className="absolute z-10 hidden w-36 rounded bg-white py-2 shadow-lg group-hover:block">
-                <NavItem to="/movie" id="popular">Popular</NavItem>
-                <NavItem to="/movie" id="now_playing">Now Playing</NavItem>
-                <NavItem to="/movie" id="upcoming">Upcoming</NavItem>
-                <NavItem to="/movie" id="top_rated">Top Rated</NavItem>
+                <NavItem to="/movie" id="popular">
+                  Popular
+                </NavItem>
+                <NavItem to="/movie" id="now_playing">
+                  Now Playing
+                </NavItem>
+                <NavItem to="/movie" id="upcoming">
+                  Upcoming
+                </NavItem>
+                <NavItem to="/movie" id="top_rated">
+                  Top Rated
+                </NavItem>
               </ul>
             </li>
             <li className="group relative inline-block font-medium">
               <span className="cursor-pointer">TV Show</span>
               <ul className="absolute z-10 hidden w-36 rounded bg-white py-2 shadow-lg group-hover:block">
-                <NavItem to="/tv" id="popular">Popular</NavItem>
-                <NavItem to="/tv" id="airing-today">Airing Today</NavItem>
-                <NavItem to="/tv" id="on-the-air">On The Air</NavItem>
-                <NavItem to="/tv" id="popular">Popular</NavItem>
+                <NavItem to="/tv" id="popular">
+                  Popular
+                </NavItem>
+                <NavItem to="/tv" id="airing_today">
+                  Airing Today
+                </NavItem>
+                <NavItem to="/tv" id="on_the_air">
+                  On The Air
+                </NavItem>
+                <NavItem to="/tv" id="top_rated">
+                  Top Rated
+                </NavItem>
               </ul>
             </li>
           </ul>

@@ -1,12 +1,12 @@
 import Movie from "../components/Movie";
 import { useLoaderData } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { getMovies } from "../services/getMovies";
+import { getTvShows } from "../services/getTVShows";
 import { formatHeaderName } from "../utils/headerNameUtils";
 
-export async function movieLoader({ params }) {
+export async function tvShowLoader({ params }) {
   const { id } = params;
-  const data = await getMovies(id);
+  const data = await getTvShows(id);
   return data;
 }
 
@@ -18,7 +18,11 @@ export default function Movies() {
   return (
     <section>
       <div className="flex items-center gap-4">
-        <h1 className="text-xl font-bold text-primary">{headerName} Movies</h1>
+        <h1 className="text-xl font-bold text-primary">
+          {location.pathname == "/tv/airing_today"
+            ? "TV Shows " + headerName
+            : headerName + " TV Shows"}
+        </h1>
       </div>
 
       <Movie data={data} />

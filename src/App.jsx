@@ -12,13 +12,19 @@ import Detail, { movieDetailLoader } from "./pages/Detail";
 import NotFound from "./pages/NotFound";
 import MovieSearchContextProvider from "./context/MovieSearch";
 import Movies, { movieLoader } from "./pages/Movies";
+import TvShows, { tvShowLoader } from "./pages/TvShows";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} loader={homeLoader} />
       <Route path="movie/:id" element={<Movies />} loader={movieLoader} />
-      <Route path="movie-detail/:id" element={<Detail />} loader={movieDetailLoader} />
+      <Route path="tv/:id" element={<TvShows />} loader={tvShowLoader} />
+      <Route
+        path="movie-detail/:id"
+        element={<Detail />}
+        loader={movieDetailLoader}
+      />
       <Route path="search/:query" element={<Result />} />
       <Route path="*" element={<NotFound />} />
     </Route>,
