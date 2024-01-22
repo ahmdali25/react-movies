@@ -1,9 +1,12 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getMovieDetails } from "../services/getMovieDetails";
 import { getMovieCredits } from "../services/getMovieCredits";
 import { getMovieRecommendations } from "../services/getMovieRecommendations";
+import { getTvDetails } from "../services/getTvDetails";
+import { getTvCredits } from "../services/getTvCredits";
+import { getTvRecommendations } from "../services/getTvRecommendations";
 import { getMovieVideos } from "../services/getMovieVideos";
 import ProfileCard from "../components/ProfileCard";
 import MovieCard from "../components/MovieCard";
@@ -32,8 +35,30 @@ export async function movieDetailLoader({ params }) {
   return data;
 }
 
+export async function tvDetailLoader({ params }) {
+  const { id } = params;
+  let data = {
+    movie: null,
+    cast: null,
+    recommendations: [],
+  };
+
+  data.movie = await getTvDetails(id);
+  data.cast = await getTvCredits(id);
+  data.recommendations = await getTvRecommendations(id);
+
+  // scroll to top after get data
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+
+  return data;
+}
+
 export default function Detail() {
   const { id } = useParams();
+  const location = useLocation();
   const data = useLoaderData();
   const [trailer, setTrailer] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,8 +86,20 @@ export default function Detail() {
   }
 
   function findDirector(arr) {
-    const director = arr.find((crew) => crew.job === "Director");
-    return director;
+    const sortedArr = arr.sort((a, b) => {
+      if (a.job === "Director") {
+        return -1; // "Director" comes first
+      } else if (b.job === "Director") {
+        return 1; // "Director" comes first
+      } else if (a.job === "Executive Producer") {
+        return -1; // "Executive Producer" comes next
+      } else if (b.job === "Executive Producer") {
+        return 1; // "Executive Producer" comes next
+      }
+      return 0; // No priority, maintain the order
+    });
+
+    return sortedArr[0];
   }
 
   async function handleClick() {
@@ -101,7 +138,7 @@ export default function Detail() {
         )}
 
         <div>
-          <h1 className="text-4xl font-bold">{movie.title}</h1>
+          <h1 className="text-4xl font-bold">{movie.title || movie.name}</h1>
           <p className="mt-1 font-semibold">{movie.tagline}</p>
           <div className="mt-2 flex gap-6">
             <div className="flex gap-2">
@@ -110,7 +147,13 @@ export default function Detail() {
                 {movie.vote_average.toFixed(1)}
               </h2>
               <span>
-                {movie.release_date ? formatDate(movie.release_date) : ""}
+                {location.pathname.startsWith("/movie-detail")
+                  ? movie.release_date
+                    ? formatDate(movie.release_date)
+                    : ""
+                  : movie.first_air_date
+                  ? formatDate(movie.first_air_date)
+                  : ""}
               </span>
             </div>
             <div className="list-item">
@@ -135,8 +178,8 @@ export default function Detail() {
           </div>
           <h2 className="mt-4 text-xl font-semibold">Overview</h2>
           <p className="mt-2 font-medium">{movie.overview}</p>
-          <h2 className="mt-3 text-base font-semibold">{crew.name}</h2>
-          <p>Director</p>
+          <h2 className="mt-3 text-base font-semibold">{crew?.name ?? ""}</h2>
+          <p>{crew?.job ?? ""}</p>
         </div>
       </div>
       <h2 className="mt-3 text-xl font-bold">Cast</h2>
@@ -184,10 +227,15 @@ export default function Detail() {
             <MovieCard
               key={movie.id}
               id={movie.id}
-              title={movie.title}
+              title={movie.title || movie.name}
               poster={movie.poster_path}
               rating={movie.vote_average}
-              releaseDate={movie.release_date}
+              releaseDate={movie.release_date || movie.first_air_date}
+              path={
+                location.pathname.startsWith("/movie-detail")
+                  ? "movie-detail"
+                  : "tv-detail"
+              }
             ></MovieCard>
           ))}
         </div>

@@ -12,6 +12,7 @@ export default function Movie(data) {
           poster={movie.poster_path}
           rating={movie.vote_average}
           releaseDate={movie.release_date}
+          path="movie-detail"
         ></MovieCard>
       ))}
     </div>

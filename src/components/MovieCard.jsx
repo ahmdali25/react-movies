@@ -2,13 +2,20 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { StarIcon, PhotoIcon } from "./Icons";
 
-export default function MovieCard({ id, poster, title, rating, releaseDate }) {
+export default function MovieCard({
+  id,
+  poster,
+  title,
+  rating,
+  releaseDate,
+  path,
+}) {
   const imgSrc = `${import.meta.env.VITE_APP_API_IMG_URL}${poster}`;
   const year = new Date(releaseDate).getFullYear();
 
   return (
     <Link
-      to={`/movie-detail/${id}`}
+      to={`/${path}/${id}`}
       className="rounded-lg bg-slate-800 transition duration-300 ease-in-out hover:opacity-90"
     >
       {poster ? (
@@ -39,4 +46,5 @@ MovieCard.propTypes = {
   title: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   releaseDate: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };

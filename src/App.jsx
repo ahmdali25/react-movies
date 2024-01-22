@@ -8,7 +8,7 @@ import {
 import RootLayout from "./layouts/RootLayout";
 import Home, { homeLoader } from "./pages/Home";
 import Result from "./pages/Result";
-import Detail, { movieDetailLoader } from "./pages/Detail";
+import Detail, { movieDetailLoader, tvDetailLoader } from "./pages/Detail";
 import NotFound from "./pages/NotFound";
 import MovieSearchContextProvider from "./context/MovieSearch";
 import Movies, { movieLoader } from "./pages/Movies";
@@ -24,6 +24,11 @@ const router = createBrowserRouter(
         path="movie-detail/:id"
         element={<Detail />}
         loader={movieDetailLoader}
+      />
+      <Route
+        path="tv-detail/:id"
+        element={<Detail />}
+        loader={tvDetailLoader}
       />
       <Route path="search/:query" element={<Result />} />
       <Route path="*" element={<NotFound />} />

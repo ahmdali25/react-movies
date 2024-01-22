@@ -1,4 +1,4 @@
-import Movie from "../components/Movie";
+import Tv from "../components/Tv";
 import { useLoaderData } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { getTvShows } from "../services/getTVShows";
@@ -25,7 +25,7 @@ export default function Movies() {
         </h1>
       </div>
 
-      <Movie data={data} />
+      <Tv data={data} />
     </section>
   );
 }
