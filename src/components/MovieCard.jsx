@@ -19,7 +19,11 @@ export default function MovieCard({
       className="rounded-lg bg-slate-800 transition duration-300 ease-in-out hover:opacity-90"
     >
       {poster ? (
-        <img src={imgSrc} alt={title} className="w-full rounded-t-lg xl:h-96" />
+        <img
+          src={imgSrc}
+          alt={title}
+          className="w-full rounded-t-lg 2xl:h-96"
+        />
       ) : (
         <div className="h-4/5 rounded-t-lg bg-[#DBDBDB] px-16 py-24">
           <PhotoIcon />

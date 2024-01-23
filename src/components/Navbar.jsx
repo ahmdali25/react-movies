@@ -1,8 +1,7 @@
 import { useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getSearchMovie } from "../services/getSearchMovie";
 import { MovieSearch } from "../context/MovieSearch";
-import { useNavigate, useLocation } from "react-router-dom";
 import NavItem from "./NavItem";
 
 export default function Navbar() {
