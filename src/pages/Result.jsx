@@ -16,10 +16,11 @@ export default function Result() {
           <MovieCard
             key={movie.id}
             id={movie.id}
-            title={movie.title}
+            title={movie.title || movie.name}
             poster={movie.poster_path}
             rating={movie.vote_average}
-            releaseDate={movie.release_date}
+            releaseDate={movie.release_date || movie.first_air_date}
+            path={movie.title ? "movie-detail" : "tv-detail"}
           ></MovieCard>
         ))}
       </div>
