@@ -1,6 +1,5 @@
-import { useLoaderData, useParams, useLocation } from "react-router-dom";
+import { Link, useLoaderData, useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { getMovieDetails } from "../services/getMovieDetails";
 import { getMovieCredits } from "../services/getMovieCredits";
 import { getMovieRecommendations } from "../services/getMovieRecommendations";
