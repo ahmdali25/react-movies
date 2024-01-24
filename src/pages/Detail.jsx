@@ -8,6 +8,7 @@ import { getTvDetails } from "../services/getTvDetails";
 import { getTvCredits } from "../services/getTvCredits";
 import { getTvRecommendations } from "../services/getTvRecommendations";
 import { getMovieVideos } from "../services/getMovieVideos";
+import { formatDate } from "../utils/formatDateUtils";
 import ProfileCard from "../components/ProfileCard";
 import MovieCard from "../components/MovieCard";
 import Button from "../components/Button";
@@ -74,15 +75,6 @@ export default function Detail() {
     let minutes = (hours - rhours) * 60;
     let rminutes = Math.round(minutes);
     return rhours + "h " + rminutes + "m";
-  }
-
-  function formatDate(date) {
-    const newDate = new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    });
-    return newDate;
   }
 
   function findDirector(arr) {
