@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { getSearchMovie } from "../services/getSearchMovie";
+import fetchData from "../api/api";
 import { MovieSearch } from "../context/MovieSearch";
 import NavItem from "./NavItem";
 import { SearchIcon } from "./Icons";
@@ -17,8 +17,8 @@ export default function Navbar() {
     const searchType = isMovie ? "movie" : "tv";
 
     if (query) {
-      getSearchMovie(searchType, query).then((data) => {
-        setMovie(data);
+      fetchData(`/search/${searchType}`, { query }).then((data) => {
+        setMovie(data.results);
         navigate(`/search/${query}`);
       });
     }

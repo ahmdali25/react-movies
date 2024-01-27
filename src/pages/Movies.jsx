@@ -1,13 +1,13 @@
 import Movie from "../components/Movie";
 import { useLoaderData } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { getMovies } from "../services/getMovies";
+import fetchData from "../api/api";
 import { formatHeaderName } from "../utils/headerNameUtils";
 
 export async function movieLoader({ params }) {
   const { id } = params;
-  const data = await getMovies(id);
-  return data;
+  const data = await fetchData(`/movie/${id}`);
+  return data.results;
 }
 
 export default function Movies() {

@@ -1,12 +1,6 @@
 import { Link, useLoaderData, useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getMovieDetails } from "../services/getMovieDetails";
-import { getMovieCredits } from "../services/getMovieCredits";
-import { getMovieRecommendations } from "../services/getMovieRecommendations";
-import { getTvDetails } from "../services/getTvDetails";
-import { getTvCredits } from "../services/getTvCredits";
-import { getTvRecommendations } from "../services/getTvRecommendations";
-import { getMovieVideos } from "../services/getMovieVideos";
+import fetchData from "../api/api";
 import { formatDate } from "../utils/formatDateUtils";
 import ProfileCard from "../components/ProfileCard";
 import MovieCard from "../components/MovieCard";
@@ -22,9 +16,9 @@ export async function movieDetailLoader({ params }) {
     recommendations: [],
   };
 
-  data.movie = await getMovieDetails(id);
-  data.cast = await getMovieCredits(id);
-  data.recommendations = await getMovieRecommendations(id);
+  data.movie = await fetchData(`/movie/${id}`);
+  data.cast = await fetchData(`/movie/${id}/credits`);
+  data.recommendations = await fetchData(`/movie/${id}/recommendations`);
 
   // scroll to top after get data
   window.scrollTo({
@@ -43,9 +37,9 @@ export async function tvDetailLoader({ params }) {
     recommendations: [],
   };
 
-  data.movie = await getTvDetails(id);
-  data.cast = await getTvCredits(id);
-  data.recommendations = await getTvRecommendations(id);
+  data.movie = await fetchData(`/tv/${id}`);
+  data.cast = await fetchData(`/tv/${id}/credits`);
+  data.recommendations = await fetchData(`/tv/${id}/recommendations`);
 
   // scroll to top after get data
   window.scrollTo({
@@ -94,7 +88,7 @@ export default function Detail() {
   }
 
   async function handleClick() {
-    const data = await getMovieVideos(id);
+    const data = await fetchData(`/movie/${id}/videos`);
     const findTrailer = data.find(
       (video) =>
         (video.name === "Official Trailer") | (video.name === "Main Trailer"),

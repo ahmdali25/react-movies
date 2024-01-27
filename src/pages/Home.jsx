@@ -1,10 +1,10 @@
 import Movie from "../components/Movie";
 import { useLoaderData } from "react-router-dom";
-import { getTrendingMovies } from "../services/getTrendingMovies";
+import fetchData from "../api/api";
 
 export async function homeLoader() {
-  const data = await getTrendingMovies();
-  return data;
+  const data = await fetchData("/trending/movie/day");
+  return data.results;
 }
 
 export default function Home() {

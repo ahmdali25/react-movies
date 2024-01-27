@@ -1,16 +1,16 @@
 import Tv from "../components/Tv";
 import { useLoaderData } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { getTvShows } from "../services/getTVShows";
+import fetchData from "../api/api";
 import { formatHeaderName } from "../utils/headerNameUtils";
 
 export async function tvShowLoader({ params }) {
   const { id } = params;
-  const data = await getTvShows(id);
-  return data;
+  const data = await fetchData(`/tv/${id}`);
+  return data.results;
 }
 
-export default function Movies() {
+export default function TvShows() {
   const data = useLoaderData();
   const location = useLocation();
   const headerName = formatHeaderName(location.pathname);
