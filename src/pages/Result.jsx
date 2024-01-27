@@ -28,7 +28,7 @@ export default function Result() {
           ))}
         </div>
       ) : (
-        <p className="mt-4">Tidak ada film yang ditemukan.</p>
+        <p className="mt-4">No movies found.</p>
       )}
     </section>
   );

@@ -22,7 +22,7 @@ export default function Navbar() {
         navigate(`/search/${query}`);
       });
     }
-  }, [query, setMovie, navigate]);
+  }, [query, setMovie, navigate, isMovie]);
 
   function handleSearch(query) {
     setQuery(query);
