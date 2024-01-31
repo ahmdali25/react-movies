@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import fetchData from "../api/api";
 import { formatHeaderName } from "../utils/headerNameUtils";
+import useDynamicTitle from "../utils/dynamicTitleUtils";
 
 export async function movieLoader({ params }) {
   const { id } = params;
@@ -14,6 +15,8 @@ export default function Movies() {
   const data = useLoaderData();
   const location = useLocation();
   const headerName = formatHeaderName(location.pathname);
+
+  useDynamicTitle(`${headerName} Movies - MovieDB`);
 
   return (
     <section>

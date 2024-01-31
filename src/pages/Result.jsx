@@ -1,9 +1,12 @@
 import MovieCard from "../components/MovieCard";
 import { useContext } from "react";
 import { MovieSearch } from "../context/MovieSearch";
+import useDynamicTitle from "../utils/dynamicTitleUtils";
 
 export default function Result() {
   const { query, movie } = useContext(MovieSearch);
+
+  useDynamicTitle(`${query} - MovieDB`);
 
   return (
     <section>

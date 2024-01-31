@@ -2,6 +2,7 @@ import { Link, useLoaderData, useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import fetchData from "../api/api";
 import { formatDate } from "../utils/formatDateUtils";
+import useDynamicTitle from "../utils/dynamicTitleUtils";
 import ProfileCard from "../components/ProfileCard";
 import MovieCard from "../components/MovieCard";
 import Button from "../components/Button";
@@ -54,13 +55,17 @@ export default function Detail() {
   const { id } = useParams();
   const location = useLocation();
   const data = useLoaderData();
+
   const [trailer, setTrailer] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const movie = data.movie;
   const cast = data.cast.cast;
   const crew = findDirector(data.cast.crew);
   const recommendations = data.recommendations.results;
   const poster = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
+
+  useDynamicTitle(`${movie.title ? movie.title : movie.name} - MovieDB`);
 
   function timeConvert(num) {
     let hours = num / 60;

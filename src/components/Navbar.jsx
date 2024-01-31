@@ -67,7 +67,7 @@ export default function Navbar() {
                   Airing Today
                 </NavItem>
                 <NavItem to="/tv" id="on_the_air">
-                  On The Air
+                  On TV
                 </NavItem>
                 <NavItem to="/tv" id="top_rated">
                   Top Rated
