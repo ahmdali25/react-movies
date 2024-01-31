@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import fetchData from "../api/api";
 import { formatDate } from "../utils/formatDateUtils";
 import useDynamicTitle from "../utils/dynamicTitleUtils";
+import useScrollToTop from "../utils/scrollToTopUtils";
 import ProfileCard from "../components/ProfileCard";
 import MovieCard from "../components/MovieCard";
 import Button from "../components/Button";
@@ -21,11 +22,7 @@ export async function movieDetailLoader({ params }) {
   data.cast = await fetchData(`/movie/${id}/credits`);
   data.recommendations = await fetchData(`/movie/${id}/recommendations`);
 
-  // scroll to top after get data
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
+  useScrollToTop(data.movie);
 
   return data;
 }
@@ -42,11 +39,7 @@ export async function tvDetailLoader({ params }) {
   data.cast = await fetchData(`/tv/${id}/credits`);
   data.recommendations = await fetchData(`/tv/${id}/recommendations`);
 
-  // scroll to top after get data
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
+  useScrollToTop(data.movie);
 
   return data;
 }
