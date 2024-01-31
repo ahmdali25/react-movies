@@ -87,9 +87,9 @@ export default function Detail() {
 
   async function handleClick() {
     const data = await fetchData(`/movie/${id}/videos`);
-    const findTrailer = data.find(
+    const findTrailer = data.results.find(
       (video) =>
-        (video.name === "Official Trailer") | (video.name === "Main Trailer"),
+        video.name === "Official Trailer" || video.name === "Main Trailer",
     );
 
     setTrailer(findTrailer);
