@@ -16,7 +16,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const searchType = isMovie ? "movie" : "tv";
-    const queryParam = params.query || query;
+    const queryParam = query ? query : params.query;
 
     if (queryParam) {
       fetchData(`/search/${searchType}`, { query: queryParam }).then((data) => {
