@@ -65,7 +65,8 @@ export default function Detail() {
     let rhours = Math.floor(hours);
     let minutes = (hours - rhours) * 60;
     let rminutes = Math.round(minutes);
-    return rhours + "h " + rminutes + "m";
+
+    return rminutes === 0 ? rhours + "h" : rhours + "h " + rminutes + "m";
   }
 
   function findDirector(arr) {
