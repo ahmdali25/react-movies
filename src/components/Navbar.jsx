@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import fetchData from "../api/api";
 import { MovieSearch } from "../context/MovieSearch";
 import NavItem from "./NavItem";
@@ -9,20 +9,22 @@ export default function Navbar() {
   const { query, setQuery, setMovie } = useContext(MovieSearch);
   const navigate = useNavigate();
   const location = useLocation();
+  const params = useParams();
 
   const isMovie =
     location.pathname === "/" || location.pathname.startsWith("/movie");
 
   useEffect(() => {
     const searchType = isMovie ? "movie" : "tv";
+    const queryParam = params.query || query;
 
-    if (query) {
-      fetchData(`/search/${searchType}`, { query }).then((data) => {
+    if (queryParam) {
+      fetchData(`/search/${searchType}`, { query: queryParam }).then((data) => {
         setMovie(data.results);
-        navigate(`/search/${query}`);
+        navigate(`/search/${queryParam}`);
       });
     }
-  }, [query, setMovie, navigate, isMovie]);
+  }, [query, params.query, setMovie, navigate, isMovie]);
 
   function handleSearch(query) {
     setQuery(query);
